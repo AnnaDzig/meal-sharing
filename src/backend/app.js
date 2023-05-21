@@ -25,6 +25,7 @@ router.use("/meals", mealsRouter);
 router.use("/reservations", reservationsRouter);
 router.use("/review", routerReviews);
 
+app.use(router);
 
 if (process.env.API_PATH) {
   app.use(process.env.API_PATH, router);
