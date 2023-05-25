@@ -1,0 +1,31 @@
+.meals-section {
+  margin-top: 2rem;
+}
+
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.meal-card {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.meal-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #f0f0f0;
+  color: #000;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}

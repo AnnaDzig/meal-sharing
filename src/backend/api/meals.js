@@ -19,11 +19,11 @@ router.get('/', (req, res) => {
 });
 
 // POST a new meal
-router.post('/', (req, res) => {
-  const { name, description, price } = req.body;
+/*router.post('/', async (req, res) => {
+  const { title, description, price } = req.body;
   knex('meal')
     .insert({
-      name: name,
+      title: title,
       description: description,
       price: price,
     })
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     });
 });
-
+*/
 // GET a meal by id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
