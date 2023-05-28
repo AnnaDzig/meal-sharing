@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "./logo.png";
 
 export const Footer = () => {
   return (
     <footer>
-      <section>
-        <ul>
+      <section className="footer">
+        <ul className="footer-section">
           <li>
             <Link to="/" className="footerLink">
               Home
@@ -21,7 +22,10 @@ export const Footer = () => {
               Meals
             </Link>
           </li>
-        </ul>
+        </ul>{" "}
+        <div className="footer-logo">
+          <img src={Logo} id="logo-footer" alt="Logo" /> Meal Sharing
+        </div>
       </section>
     </footer>
   );

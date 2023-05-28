@@ -1,8 +1,12 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const knex = require("../database");
-//const { require } = require("app-root-path");
-const Meal = require('./meals')
+const knex = require('../database');
+const Meal = require('./meals');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+app.use('/meals', router);
 
 // GET all meals
 router.get('/', (req, res) => {
@@ -19,7 +23,7 @@ router.get('/', (req, res) => {
 });
 
 // POST a new meal
-/*router.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
   const { title, description, price } = req.body;
   knex('meal')
     .insert({
@@ -35,7 +39,7 @@ router.get('/', (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     });
 });
-*/
+
 // GET a meal by id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
@@ -92,8 +96,6 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-
-const app = express();
 
 app.get('/api/meals', (req, res) => {
   // Parse query parameters

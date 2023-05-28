@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Home.css"; // Import the CSS file for component-specific styles
 
 const Home = () => {
   // Example meals data
@@ -31,9 +30,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Meal Sharing App</h1>
-      <h2>Discover Delicious Meals</h2>
-
+      <h1 className="thin-heading">Discover Delicious Meals</h1>
       <section className="meals-section">
         <h3>Featured Meals</h3>
         <div className="meals-grid">

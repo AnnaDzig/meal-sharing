@@ -9,13 +9,13 @@ export const Nav = () => {
         <img src={Logo} id="logo" alt="Logo" /> Meal Sharing
       </div>
       <div>
-        <div>
+        <div className="">
           <ul className="listContainer">
             <li className="list-container-item">
               <Link to="/">Home</Link>
             </li>
             <li className="list-container-item">
-              <Link to="/meals/:id">Meals</Link>
+              <Link to="/reservation">Reservation</Link>
             </li>
             <li className="list-container-item">
               <Link to="/add-your-meal">Add Your Meal</Link>
@@ -24,7 +24,7 @@ export const Nav = () => {
               <Link to="/about">About</Link>
             </li>
             <li className="list-container-item">
-              <Link to="/contact">Contact</Link>
+              <Link to="/reviews">Reviews</Link>
             </li>
           </ul>
         </div>

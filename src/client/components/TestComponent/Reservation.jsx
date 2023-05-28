@@ -1,97 +1,108 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
-export const Reservation = (props) => {
-  const [inputValues, setInputValues] = useState({
-    contact_phonenumber: "",
+const Reservation = () => {
+  const initialFormData = {
+    numberOfGuests: "",
+    mealId: "",
+    createdDate: "",
+    contactPhoneNumber: "",
     contactName: "",
     contactEmail: "",
-  });
-
-  const handleInput = (e) => {
-    const key = e.target.name;
-    const value = e.target.value;
-    setInputValues((inputValues) => ({ ...inputValues, [key]: value }));
   };
-  console.log(inputValues);
 
-  const handleSubmit = async (e) => {
+  const [formData, setFormData] = useState(initialFormData);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    //To avoid 504 error
-    if (
-      inputValues.contactEmail !== "" &&
-      inputValues.contact_phonenumber !== "" &&
-      inputValues.contactName !== ""
-    ) {
-      const newBooking = {
-        numberOfGuests: 1,
-        mealId: props.id,
-        contact_phonenumber: inputValues.contact_phonenumber,
-        contactName: inputValues.contactName,
-        contactEmail: inputValues.contactEmail,
-      };
-      try {
-        const response = await fetch("api/reservations/", {
-          method: "POST",
-          body: JSON.stringify(newBooking),
-          headers: {
-            "Content-type": "application/json",
-          },
-        });
-        if (response.ok) {
-          alert("You have got the spot!");
-          return response;
-        } else {
-          alert(`Something went wrong: ${response.status}. Please try again`);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      alert("You should fill out all the fields");
-      return;
-    }
+
+    axios
+      .post("/api/reservations", formData)
+      .then((response) => {
+        console.log(response.data.message);
+        setSuccessMessage("The reservation made successfully");
+        setFormData(initialFormData); // Reset form inputs
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle error
+      });
   };
 
   return (
-    <div className="reservation-form-wrapper">
-      <div className="reservation-form-container">
-        <h2 className="greenHeading">Book yourself a spot</h2>
-        <p className="italics">Fill out a short form below</p>
-        <form className="flex-form">
-          <label>
-            Contact Name
-            <input
-              type="text"
-              required
-              name="contactName"
-              onChange={handleInput}
-            ></input>
-          </label>
-          <label>
-            Contact Phone
-            <input
-              type="text"
-              required
-              name="contactPhonenumber"
-              onChange={handleInput}
-            ></input>
-          </label>
-          <label>
-            Contact Email
-            <input
-              type="email"
-              required
-              name="contactEmail"
-              onChange={handleInput}
-            ></input>
-          </label>
-          <button type="submit" onClick={handleSubmit}>
-            Submit
-          </button>
-        </form>
+    <div className="reservation-container">
+      <div className="meal-image-block">
+        <img
+          className="meal-image"
+          src="https://thumbs.dreamstime.com/b/restaurant-chillin…erved-concept-food-table-reservation-80928343.jpg"
+          alt="Meal"
+        />
       </div>
+
+      <form className="form" onSubmit={handleSubmit}>
+        <label>
+          Number of Guests:
+          <input
+            type="text"
+            name="numberOfGuests"
+            value={formData.numberOfGuests}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Meal ID:
+          <input
+            type="text"
+            name="mealId"
+            value={formData.mealId}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Created Date:
+          <input
+            type="datetime-local"
+            name="createdDate"
+            value={formData.createdDate}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Contact Phone Number:
+          <input
+            type="text"
+            name="contactPhoneNumber"
+            value={formData.contactPhoneNumber}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Contact Name:
+          <input
+            type="text"
+            name="contactName"
+            value={formData.contactName}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Contact Email:
+          <input
+            type="text"
+            name="contactEmail"
+            value={formData.contactEmail}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+
+      {successMessage && <p>{successMessage}</p>}
     </div>
   );
 };

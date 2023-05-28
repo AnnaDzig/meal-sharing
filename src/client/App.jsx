@@ -9,6 +9,7 @@ import Meal from "./components/TestComponent/Meal";
 import MealsList from "./components/TestComponent/MealsList";
 import Footer from "./components/TestComponent/Footer";
 import Reservation from "./components/TestComponent/Reservation";
+import Review from "./components/TestComponent/Review";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/add-your-meal" component={AddYourMeal} />
           <Route path="/meals/:id" component={Meal} />
           <Route path="/reservation" component={Reservation} />
+          <Route path="/reviews" component={Review} />
         </Switch>
         <Footer />
       </div>

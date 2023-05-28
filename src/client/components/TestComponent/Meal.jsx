@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Logo from "./logo.png";
 
 const Meal = () => {
-  const { id } = useParams(); // Get the meal ID from the URL parameter
-
-  // Example meal data
+  const { id } = useParams();
   const meal = {
     id: 1,
     title: "Classic Cheesecake",
@@ -24,7 +20,6 @@ const Meal = () => {
   const handleReservationSubmit = (e) => {
     e.preventDefault();
 
-    // Make a POST request to create a new reservation
     const reservationData = {
       mealId: meal.id,
       name,
@@ -32,7 +27,6 @@ const Meal = () => {
       phone,
     };
 
-    // Make the API call using fetch or your preferred library
     fetch("/api/reservations", {
       method: "POST",
       headers: {
@@ -69,13 +63,13 @@ const Meal = () => {
       mealId: meal.id,
       review,
     };
-    // Make the API call and handle the response
-    // ...
   };
 
   return (
     <div>
-      <img className="meal-image" src={meal.image} alt="Meal" />
+      <div className="meal-image-block">
+        <img className="meal-image" src={meal.image} alt="Meal" />
+      </div>
       <h2>{meal.title}</h2>
       <p>{meal.description}</p>
 
@@ -90,11 +84,6 @@ const Meal = () => {
             onChange={(e) => setName(e.target.value)}
             required
           />
-          <Link to="/">
-            <div className="forImg logo-text">
-              <img src={Logo} id="logo" alt="Logo" /> Meal Sharing
-            </div>
-          </Link>
           <label htmlFor="email">Email:</label>
           <input
             type="email"

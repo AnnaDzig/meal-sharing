@@ -7,10 +7,12 @@ const MealCard = ({ meal }) => {
 
   return (
     <div className="meal-card">
-      <h3 className="meal-title">{title}</h3>
-      <img className="meal-image" src={imageURL} alt={title} />
-      <p className="meal-description">Ingredients: {description}</p>
-      <p className="meal-price">Price: {price}</p>
+      <div className="form">
+        <h3 className="meal-title">{title}</h3>
+        <img className="meal-image" src={imageURL} alt={title} />
+        <p className="meal-description">Ingredients: {description}</p>
+        <p className="meal-price">Price: {price}</p>
+      </div>
     </div>
   );
 };
