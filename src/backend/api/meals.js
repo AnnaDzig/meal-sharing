@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const knex = require('../database');
 const Meal = require('./meals');
 const bodyParser = require('body-parser');
@@ -7,6 +8,10 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 app.use('/meals', router);
+
+const knex = require("../database");
+//const { require } = require("app-root-path");
+const Meal = require('./meals')
 
 // GET all meals
 router.get('/', (req, res) => {
@@ -23,6 +28,7 @@ router.get('/', (req, res) => {
 });
 
 // POST a new meal
+
 router.post('/', async (req, res) => {
   const { title, description, price } = req.body;
   knex('meal')
@@ -94,6 +100,7 @@ router.delete('/:id', (req, res) => {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
     });
+
 });
 
 
@@ -145,6 +152,7 @@ app.get('/api/meals', (req, res) => {
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
+
 });
 
 module.exports = router;
