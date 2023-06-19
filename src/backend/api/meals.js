@@ -1,62 +1,17 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
+
+const knex = require('../database');
+const Meal = require('./meals');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+app.use('/meals', router);
+
 const knex = require("../database");
 //const { require } = require("app-root-path");
 const Meal = require('./meals')
-
-// router.get("/", async (request, response) => {
-//   try {
-//     // knex syntax for selecting things. Look up the documentation for knex for further info
-//     const titles = await knex("meal").select("*");
-//     response.json(titles);
-//   } catch (error) {
-//     throw error;
-//   }
-// });
-
-/*
-//Get all meals
-
-router.get('/meals', (req, res) => {
-  const meals = Meal.getAllMeals();
-  res.json(meals);
-});
-
-//Add a new meal
-
-router.post('/meals', (req, res) => {
-  const meal = req.body;
-  const newMeal = Meal.addNewMeal(meal);
-  res.json(newMeal);
-});
-
-// Get a meal by id
-
-router.get('./meals/:id', (req, res) => {
-  const id = req.params.id;
-  const mealById = Meal.getMealById(id);
-  res.json(mealById);
-});
-
-// Delete a meal by id
-
-router.delete('./meals/:id', (req, res) => {
-  const id = req.params.id;
-  const resultOfDelete = Meal.deleteMealById(id);
-  res.json(resultOfDelete);
-});
-
-// Update a meal by id
-
-router.put('./meals/:id', (req, res) => {
-  const id = req.params.id;
-  const updateMeal = req.body;
-  const resultOfUpdate = Meal.updateMealById(id, updateMeal);
-  res.json(resultOfUpdate);
-});
-
-module.exports = router;
-*/
 
 // GET all meals
 router.get('/', (req, res) => {
@@ -73,11 +28,12 @@ router.get('/', (req, res) => {
 });
 
 // POST a new meal
-router.post('/', (req, res) => {
-  const { name, description, price } = req.body;
+
+router.post('/', async (req, res) => {
+  const { title, description, price } = req.body;
   knex('meal')
     .insert({
-      name: name,
+      title: title,
       description: description,
       price: price,
     })
@@ -144,6 +100,59 @@ router.delete('/:id', (req, res) => {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
     });
+
+});
+
+
+app.get('/api/meals', (req, res) => {
+  // Parse query parameters
+  const { maxPrice, availableReservations, title, dateAfter, dateBefore, limit, sortKey, sortDir } = req.query;
+
+  // Build the database query
+  const query = knex.select('*').from('meals');
+
+  // Apply filters
+  if (maxPrice) {
+    query.where('price', '<', maxPrice);
+  }
+  if (availableReservations) {
+    const reservationsOperator = availableReservations === 'true' ? '>' : '=';
+    query.where('available_reservations', reservationsOperator, 0);
+  }
+  if (title) {
+    query.where('title', 'like', `%${title}%`);
+  }
+  if (dateAfter) {
+    query.where('date', '>', dateAfter);
+  }
+  if (dateBefore) {
+    query.where('date', '<', dateBefore);
+  }
+
+  // Apply sorting
+  if (sortKey) {
+    const direction = sortDir === 'desc' ? 'desc' : 'asc';
+    query.orderBy(sortKey, direction);
+  }
+
+  // Apply limit
+  if (limit) {
+    query.limit(limit);
+  }
+
+  // Execute the query
+  query
+    .then((results) => {
+      res.json(results);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: 'An error occurred' });
+    });
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+
 });
 
 module.exports = router;

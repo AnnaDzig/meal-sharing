@@ -1,3 +1,364 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: url("https://i.pinimg.com/736x/d3/bf/82/d3bf829999b8bd41c09fcdf35c33d36e.jpg")
+    no-repeat fixed center;
+  width: 100hv;
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.meals-section {
+  margin-bottom: 40px;
+}
+
+.meals-grid-container {
+  width: 100%;
+}
+
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.meal-card {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.meal-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/*_______Nav____________*/
+
+.NavBarContainer {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 5px solid white;
+  width: 100%;
+}
+
+.heading-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5%;
+  padding: 10px 10px;
+  font-family: "Satisfy", cursive;
+  font-size: 3rem;
+}
+
+.heading-container a:hover {
+  color: #3e3e40;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #4b7958;
+}
+
+.list-container-item {
+  padding: 10px;
+  transition: background-color 0.5s ease;
+}
+
+.list-container-item :hover {
+  padding: 10px;
+  border: solid 2px #eff5f2;
+  background-color: rgb(243, 236, 236);
+}
+
+.list-container-item:hover {
+  color: #ffffff;
+}
+
+#logo {
+  margin-left: 50px;
+  width: 80px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.logo-text {
+  font-family: "Satisfy", cursive;
+}
+
+@media screen and (max-width: 576px) {
+  .listContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .list-container-item,
+  a {
+    margin-bottom: 10px;
+  }
+
+  #logo {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  .heading-container {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .heading-container {
+    font-size: 2.5rem;
+  }
+}
+
+/*____Home________*/
+.meals-section {
+  margin-top: 2rem;
+}
+.meals-grid-container {
+  width: 100%;
+  height: 100%; /* Set the container's height to fill the available space */
+  overflow: auto; /* Add a scroll bar when content exceeds the container's height */
+}
+
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%; /* Make sure the grid occupies the full width of the container */
+}
+
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.meal-card {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.meal-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #f0f0f0;
+  color: #000;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/*____About________*/
+.about {
+  background-image: url("https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.heading {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+.about-description {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+.about-span {
+  color: green;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+article {
+  padding: 2% 2%;
+  background-color: rgba(255, 255, 255, 0.75);
+  position: relative;
+  border-radius: 5px;
+  width: 40vw;
+}
+
+@media screen and (max-width: 900px) {
+  article {
+    padding: 5% 5%;
+    width: 60vw;
+    position: relative;
+    top: 30%;
+    left: 20%;
+  }
+}
+/*_____AddYourMeal_________*/
+.add-meal {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#add-meal-bgr {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.thin-heading {
+  color: #ffffff;
+  font-family: "Rouge Script", cursive;
+  font-size: 2rem;
+  font-weight: normal;
+  line-height: 48px;
+  padding: 5px;
+  text-align: center;
+  text-shadow: 1px 1px 2px #082b34;
+}
+
+.text-adding {
+  color: #000;
+  font-size: 1.2rem;
+  line-height: 24px;
+}
+
+.thin-heading {
+  margin-top: 20px;
+}
+
+.text-adding {
+  margin-top: 10px;
+}
+
+.flex-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.ghostButton {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 650px) {
+  .add-form {
+    grid-template-columns: 40% 40%;
+  }
+}
+
+/*_______Reservation______*/
+
+.reservation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meal-image {
+  width: 300px;
+  height: 200px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-top: 20px;
+  align-items: stretch;
+}
+
+.form label {
+  margin-bottom: 10px;
+}
+
+.form input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+}
+/*_______Review__________*/
+
+.review-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*________Footer__________*/
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-color: #4b7958;
+  align-items: center;
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.2);
+  font-size: 0.8em;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5%;
+  padding: 5px;
+}
+
+.footerLink {
+  margin-bottom: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.footerLink :hover {
+  text-decoration: underline;
+  color: rgb(21, 205, 33);
+}
+
+.footer-logo {
+  font-family: "Satisfy", cursive;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#logo-footer {
+  margin: 5px;
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
 }
